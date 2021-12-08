@@ -7,7 +7,7 @@ cmake -S . -B build             \
     -DCMAKE_VERBOSE_MAKEFILE=ON \
     -DBUILD_SHARED_LIBS=ON      \
     -Dbuild_tests=OFF           \
-    ${CMAKE_ARGS}
+    ${CMAKE_ARGS} || (cat CMakeFiles/CMakeOutput.log && CMakeFiles/CMakeError.log && false)
 
 cmake --build build --parallel ${CPU_COUNT}
 
