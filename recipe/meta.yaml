@@ -30,6 +30,7 @@ requirements:
     #- blaspp =={{ version }}
     - blaspp ==2021.04
     - liblapack
+    - liblapacke
 
 test:
   commands:
