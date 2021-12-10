@@ -1,7 +1,7 @@
 @echo on
 
 :: work-around https://bitbucket.org/icl/lapackpp/issues/12
-set CXXFLAGS=%CXXFLAGS% -DFORTRAN_ADD_
+set CXXFLAGS=%CXXFLAGS% -DLAPACK_FORTRAN_ADD_
 
 cmake -S . -B build             ^
     -G "Ninja"                  ^
