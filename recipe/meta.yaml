@@ -29,6 +29,7 @@ requirements:
   host:
     #- blaspp =={{ version }}
     - blaspp ==2021.04
+    - libblas  # [win]
     - liblapack
     - liblapacke
 
