@@ -1,5 +1,8 @@
 @echo on
 
+:: work-around https://bitbucket.org/icl/lapackpp/issues/12
+set CXXFLAGS=%CXXFLAGS% -DFORTRAN_ADD_
+
 cmake -S . -B build             ^
     -G "Ninja"                  ^
     -DCMAKE_INSTALL_BINDIR=bin               ^

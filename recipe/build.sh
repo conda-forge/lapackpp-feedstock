@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# work-around https://bitbucket.org/icl/lapackpp/issues/12
+export CXXFLAGS="${CXXFLAGS} -DFORTRAN_ADD_"
+
 cmake -S . -B build             \
     -DCMAKE_INSTALL_LIBDIR=lib        \
     -DCMAKE_INSTALL_PREFIX=${PREFIX}  \
