@@ -1,6 +1,6 @@
 {% set name = "lapackpp" %}
 {% set version = "2021.04.00" %}
-{% set build = 0 %}
+{% set build = 1 %}
 {% set sha256 = "67abd8de9757dba86eb5d154cdb91f176b6c8b2b7d8e2a669ba0c221c4bb60ed" %}
 
 package:
@@ -29,7 +29,8 @@ requirements:
   host:
     #- blaspp =={{ version }}
     - blaspp ==2021.04
-    - libblas  # [win]
+    - libblas
+    - libcblas
     - liblapack
     - liblapacke
 
