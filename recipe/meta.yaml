@@ -11,6 +11,10 @@ source:
   fn: {{ version }}.tar.gz
   url: https://bitbucket.org/icl/lapackpp/downloads/lapackpp-{{ version }}.tar.gz
   sha256: {{ sha256 }}
+  patches:
+    # Missing includes
+    # https://bitbucket.org/icl/lapackpp/pull-requests/17
+    - 0001-alloc-includes.patch
 
 build:
   number: {{ build }}
