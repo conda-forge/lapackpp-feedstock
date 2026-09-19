@@ -11,6 +11,8 @@ source:
   fn: lapackpp-{{ version }}.tar.gz
   url: https://github.com/icl-utk-edu/lapackpp/releases/download/v{{ version }}/lapackpp-{{ version }}.tar.gz
   sha256: {{ sha256 }}
+  patches:
+    - 0001-lartg-include-complex.patch
 
 build:
   number: {{ build }}
