@@ -1,20 +1,16 @@
 {% set name = "lapackpp" %}
-{% set version = "2022.05.00" %}
+{% set version = "2025.05.28" %}
 {% set build = 0 %}
-{% set sha256 = "d0f548cbc9d4ac46b1f961834d113173c0b433074f77bcfd69c7c31cb89b7ff2" %}
+{% set sha256 = "cd436665cf6320ec3b1ef61d681a6d357e5b159db6d20171401d098c75fe9006" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  fn: {{ version }}.tar.gz
-  url: https://bitbucket.org/icl/lapackpp/downloads/lapackpp-{{ version }}.tar.gz
+  fn: lapackpp-{{ version }}.tar.gz
+  url: https://github.com/icl-utk-edu/lapackpp/releases/download/v{{ version }}/lapackpp-{{ version }}.tar.gz
   sha256: {{ sha256 }}
-  patches:
-    # Missing includes
-    # https://bitbucket.org/icl/lapackpp/pull-requests/17
-    - 0001-alloc-includes.patch
 
 build:
   number: {{ build }}
@@ -27,12 +23,12 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - {{ stdlib("c") }}
     - make           # [unix]
     - ninja          # [win]
-    - cmake >=3.15.0
+    - cmake >=3.17
   host:
-    #- blaspp =={{ version }}
-    - blaspp ==2022.05
+    - blaspp =={{ version }}
     - libblas
     - libcblas
     - liblapack
@@ -41,10 +37,12 @@ requirements:
 test:
   commands:
     - test -f ${PREFIX}/lib/liblapackpp${SHLIB_EXT}                               # [unix]
+    - test -f ${PREFIX}/lib/liblapackpp.so.2                                     # [linux]
+    - test -f ${PREFIX}/lib/liblapackpp.2.dylib                                  # [osx]
     - if exist %LIBRARY_PREFIX%\bin\lapackpp.dll (exit 0) else (exit 1)           # [win]
 
-    - test -f ${PREFIX}/lib/lapackpp/lapackppConfig.cmake                                 # [unix]
-    - if exist %LIBRARY_PREFIX%\lib\lapackpp\lapackppConfig.cmake (exit 0) else (exit 1)  # [win]
+    - test -f ${PREFIX}/lib/cmake/lapackpp/lapackppConfig.cmake                   # [unix]
+    - if exist %LIBRARY_PREFIX%\lapackpp\lapackppConfig.cmake (exit 0) else (exit 1)  # [win]
 
 about:
   home: https://icl.utk.edu/slate/
@@ -71,8 +69,10 @@ about:
     its Exascale Computing Initiative (ECP). Closely related to LAPACK++ is the
     BLAS++ project, which provides a C++ API for BLAS and Batch BLAS.
   doc_url: https://icl.bitbucket.io/lapackpp/
-  dev_url: https://bitbucket.org/icl/lapackpp
+  dev_url: https://github.com/icl-utk-edu/lapackpp
 
 extra:
   recipe-maintainers:
     - ax3l
+    - rileyjmurray
+    - mgates3
