@@ -1,0 +1,20 @@
+Subject: [PATCH] Include complex explicitly in lartg
+
+Backport the lartg.cc change from upstream commit:
+https://github.com/icl-utk-edu/lapackpp/commit/7e062f35d662372f428bcda38fcd3ad8c10e7f82
+
+lartg uses std::complex, but the MSVC branch of lapack/config.h does not
+include its declaration. Avoid relying on the Unix complex.h include.
+
+diff --git a/src/lartg.cc b/src/lartg.cc
+--- a/src/lartg.cc
++++ b/src/lartg.cc
+@@ -5,6 +5,8 @@
+ 
+ #include "lapack/fortran.h"
+ 
++#include <complex>
++
+ namespace lapack {
+ 
+ // -----------------------------------------------------------------------------

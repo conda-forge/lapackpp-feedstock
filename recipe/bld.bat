@@ -1,6 +1,6 @@
 @echo on
 
-:: work-around https://bitbucket.org/icl/lapackpp/issues/12
+:: Use conda-forge's Fortran symbol convention.
 set CXXFLAGS=%CXXFLAGS% -DLAPACK_FORTRAN_ADD_
 
 cmake -S . -B build             ^
@@ -12,6 +12,7 @@ cmake -S . -B build             ^
     -DCMAKE_VERBOSE_MAKEFILE=ON ^
     -DBUILD_SHARED_LIBS=ON      ^
     -Dbuild_tests=OFF           ^
+    -Dgpu_backend=none          ^
     -Duse_cmake_find_lapack=ON   
 if errorlevel 1 exit 1
 
